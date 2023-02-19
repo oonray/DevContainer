@@ -32,6 +32,9 @@ jobs:
           file: Dockerfile
           push: true
           tags: oonray/dev:${{env.RELEASE_VERSION}}
+          build-args: |
+            GO_VERSION=$(curl 'https://go.dev/VERSION?m=text')
+            EMACS_VERSION=$(curl http://ftp.gnu.org/gnu/emacs/ | tr -dc "[^a-zA-Z0-9 \\n\.]+" | grep -oE "[0-9]{1,3}.[0-9]{1,3}.tar.gz" | uniq |sort |  awk 'END{print}'|$EMACS_VERSION | sed "s/.tar.gz//g")
 
       - name: Image digest
         run: echo ${{ steps.docker_build_dev.outputs.digest }}
