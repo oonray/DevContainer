@@ -34,8 +34,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | b
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 COPY .zshrc .zshrc
 
-ARG NVM_DIR="$HOME/.nvm"
-RUN /bin/bash -c 'source $NVM_DIR/nvm.sh && nvm install node npm'
+RUN /bin/bash -c 'source $HOME/.nvm/nvm.sh && nvm install node npm'
 RUN node install --gloabl yarn
 
 RUN git clone --depth 1 https://github.com/doomemacs/doomemacs /home/oonray/.emacs.d
