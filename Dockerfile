@@ -30,11 +30,12 @@ WORKDIR /home/oonray
 RUN /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 COPY .zshrc .zshrc
 
-RUN nvm install node npm
-RUN npm install --global yarn
+RUN zsh -c "nvm install node npm"
+RUN zsh -c "npm install --global yarn"
 
 RUN git clone --depth 1 https://github.com/doomemacs/doomemacs /home/oonray/.emacs.d
 RUN .emacs.d/bin/doom install
