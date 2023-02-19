@@ -1,5 +1,5 @@
 FROM debian:latest
-RUN apt-get update && apt-get install -y curl git zsh build-essential
+RUN apt-get update && apt-get install -y curl git zsh build-essential pkg-config
 
 WORKDIR /tmp
 
