@@ -35,9 +35,9 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 COPY .zshrc .zshrc
 
 ARG NVM_DIR="$HOME/.nvm"
-RUN bash $NVM_DIR/nvm.sh
-RUN nvm install node npm
-RUN npm install --global yarn
+RUN source $NVM_DIR/nvm.sh \
+    && nvm install node npm
+RUN node install --gloabl yarn
 
 RUN git clone --depth 1 https://github.com/doomemacs/doomemacs /home/oonray/.emacs.d
 RUN .emacs.d/bin/doom install
