@@ -3,6 +3,7 @@ RUN apt-get update
 RUN apt-get install -y curl \
     git zsh build-essential pkg-config
 RUN apt-get install -y build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libncurses-dev
+RUN apt-get install -y libgnutls28-dev
 WORKDIR /tmp
 
 ARG GO_VERSION
