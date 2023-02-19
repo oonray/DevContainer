@@ -3,6 +3,8 @@ RUN apt-get update && apt-get install -y curl git zsh
 
 WORKDIR /tmp
 
+ARG GO_VERSION
+ARG EMACS_VERSION
 RUN echo "go version: $GO_VERSION"
 RUN echo "emacs version: $EMACS_VERSION"
 
