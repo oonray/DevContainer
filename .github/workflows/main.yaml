@@ -21,10 +21,12 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: env go_version
-        run: GO_VERSION=$(curl 'https://go.dev/VERSION?m=text')
+        shell: bash
+        run: echo "GO_VERSION=$(curl 'https://go.dev/VERSION?m=text')" >>  $GITHUB_ENV
 
       - name: env go_version
-        run: EMACS_VERSION=$(curl http://ftp.gnu.org/gnu/emacs/ | tr -dc "[^a-zA-Z0-9 \\n\.]+" | grep -oE "[0-9]{1,3}.[0-9]{1,3}.tar.gz" | uniq |sort |  awk 'END{print}'|$EMACS_VERSION | sed "s/.tar.gz//g")
+        shell: bash
+        run: echo 'EMACS_VERSION=$(curl http://ftp.gnu.org/gnu/emacs/ | tr -dc "[^a-zA-Z0-9 \\n\.]+" | grep -oE "[0-9]{1,3}.[0-9]{1,3}.tar.gz" | uniq |sort |  awk 'END{print}'|$EMACS_VERSION | sed "s/.tar.gz//g")' >>  $GITHUB_ENV
 
       - name: Set up Docker Buildx
         id: buildx
