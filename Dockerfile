@@ -3,7 +3,9 @@ RUN apt-get update && apt-get install -y curl git zsh
 
 WORKDIR /tmp
 
-RUN  rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.1.linux-amd64.tar.gz
+RUN GO_VERSION=$(curl https://go.dev/VERSION\?m\=text)
+RUN curl -LO https://go.dev/dl/$GO_VERSION.linux-amd64.tar.gz
+RUN  rm -rf /usr/local/go && tar -C /usr/local -xzf $GO_VERSION.linux-amd64.tar.gz
 
 RUN EMACS_VERSION=$(curl http://ftp.gnu.org/gnu/emacs/ | tr -dc "[^a-zA-Z0-9 \\n\.]+" | grep -oE "[0-9]{1,3}.[0-9]{1,3}.tar.gz" | uniq |sort |  awk 'END{print}'|$EMACS_VERSION | sed "s/.tar.gz//g")
 RUN curl -LO "http://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz"
