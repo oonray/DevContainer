@@ -3,12 +3,15 @@ RUN apt-get update && apt-get install -y curl git zsh
 
 WORKDIR /tmp
 
+RUN echo "go version: $GO_VERSION"
+RUN echo "emacs version: $EMACS_VERSION"
+
 RUN curl -LO https://go.dev/dl/$GO_VERSION.linux-amd64.tar.gz
 RUN rm -rf /usr/local/go
-RUN tar -C /usr/local -xvzf "$GO_VERSION.linux-amd64.tar.gz"
+RUN tar -C /usr/local -xvzf $GO_VERSION.linux-amd64.tar.gz
 
-RUN curl -LO "http://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz"
-RUN tar -xvzf "emacs-$EMACS_VERSION.tar.gz"
+RUN curl -LO http://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz
+RUN tar -xvzf emacs-$EMACS_VERSION.tar.gz
 
 WORKDIR emacs-$EMACS_VERSION
 RUN ./configure
