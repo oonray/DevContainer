@@ -40,8 +40,8 @@ jobs:
           push: true
           tags: oonray/dev:${{env.RELEASE_VERSION}}
           build-args: |
-            GO_VERSION=$GO_VERSION
-            EMACS_VERSION=$EMACS_VERSION
+            GO_VERSION=${{env.GO_VERSION}}
+            EMACS_VERSION=${{env.EMACS_VERSION}}
 
       - name: Image digest
         run: echo ${{ steps.docker_build_dev.outputs.digest }}
