@@ -1,6 +1,8 @@
 FROM debian:latest
-RUN apt-get update && apt-get install -y curl git zsh build-essential pkg-config
-
+RUN apt-get update
+RUN apt-get install -y curl \
+    git zsh build-essential pkg-config
+RUN apt-get install -y build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libncurses-dev
 WORKDIR /tmp
 
 ARG GO_VERSION
@@ -16,6 +18,7 @@ RUN curl -LO http://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz
 RUN tar -xvzf emacs-$EMACS_VERSION.tar.gz
 
 WORKDIR emacs-$EMACS_VERSION
+RUN ./autogen.sh
 RUN ./configure
 RUN make && make install
 
