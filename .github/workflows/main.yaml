@@ -1,0 +1,37 @@
+---
+name: Dev Docker Image
+on:
+  push:
+    tags:
+    - 'v*'
+jobs:
+  build_kali:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: clone repo
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and push kali
+        id: docker_build_kali
+        uses: docker/build-push-action@v2
+        with:
+          context: ./Docker/kali
+          file: ./Docker/kali/Dockerfile
+          push: true
+          tags: oonray/kali:${{env.RELEASE_VERSION}}
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build_kali.outputs.digest }}
