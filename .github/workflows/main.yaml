@@ -5,7 +5,7 @@ on:
     tags:
     - 'v*'
 jobs:
-  build_kali:
+  build_dev:
     runs-on: ubuntu-20.04
     steps:
       - name: Set env

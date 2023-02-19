@@ -3,7 +3,7 @@ RUN apt-get update && apt-get install -y curl git zsh
 
 WORKDIR /tmp
 
-RUN GO_VERSION=$(curl https://go.dev/VERSION\?m\=text)
+RUN GO_VERSION=$(curl "https://go.dev/VERSION\?m\=text")
 RUN curl -LO https://go.dev/dl/$GO_VERSION.linux-amd64.tar.gz
 RUN  rm -rf /usr/local/go && tar -C /usr/local -xzf $GO_VERSION.linux-amd64.tar.gz
 
