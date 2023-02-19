@@ -27,7 +27,7 @@ RUN useradd -ms /bin/zsh oonray
 USER oonray
 WORKDIR /home/oonray
 
-RUN go install golang.org/x/tools/gopls@latest
+RUN /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
