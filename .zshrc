@@ -1,45 +1,23 @@
 export PATH=$PATH:/usr/local/go/bin
 
 export ZSH="/home/oonray/.oh-my-zsh"
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="/home/oonray/.nvm"
 
-export PATH="$PATH:$GOROOT/bin"
+export PATH="$PATH:$GOROOT/bin:/home/oonray/go/bin"
 export PATH="$PATH:$GOPATH/bin"
 
-if [[ $TERM == xterm ]]; then
-    TERM=xterm-256color
-fi
-
-if [[ $TERM == screen ]]; then
-]    TERM=screen-256color
-fi
+export TERM=xterm-256color
 
 #---------------------------------------
 WORDCHARS=${WORDCHARS//\/}
 
 # hide EOL sign ('%')
 export PROMPT_EOL_MARK=""
+export PROMPT=$'{{prompt}}'
+export RPROMPT=$'{{rprompt}}'
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PROMPT=$'{{prompt}}'
-    RPROMPT=$'{{rprompt}}'
-
-    # enable syntax-highlighting
-    if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
+# enable syntax-highlighting
+if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
   unsetopt ksharrays
   . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
@@ -86,7 +64,6 @@ if [ "$color_prompt" = yes ]; then
   ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
     fi
 fi
-unset color_prompt force_color_prompt
 
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -117,13 +94,11 @@ alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Base16 Shell
-BASE16_SHELL="/home/oonray/.config/base16-shell/base16-shell-master"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
-
 plugins=(vi-mode git terraform docker docker-compose python man nmap golang kubectl perl pip sudo systemd tmux history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
+
+alias emacs="emacs -nw"
+alias tmux="tmux -2"
+
 

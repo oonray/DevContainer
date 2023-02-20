@@ -2,7 +2,7 @@ FROM debian:latest
 RUN apt-get update
 RUN apt-get install -y curl \
     git zsh build-essential pkg-config
-RUN apt-get install -y build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libncurses-dev
+RUN apt-get install -y build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libncurses-dev tmux
 RUN apt-get install -y libgnutls28-dev
 WORKDIR /tmp
 
@@ -28,7 +28,6 @@ USER oonray
 WORKDIR /home/oonray
 
 RUN /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
-
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
