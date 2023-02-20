@@ -1,6 +1,6 @@
 export PATH=$PATH:/usr/local/go/bin
 
-export ZSH="{{home}}/.oh-my-zsh"
+export ZSH="/home/oonray/.oh-my-zsh"
 export NVM_DIR="$HOME/.nvm"
 
 export PATH="$PATH:$GOROOT/bin"
