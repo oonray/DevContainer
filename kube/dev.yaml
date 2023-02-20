@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: emacs
+  labels:
+    app: emacs
+spec:
+  volumes:
+    - name: git
+      hostPath:
+        type: DirectoryOrCreate
+        path: /home/oonray/.git
+  containers:
+    - name: emacs
+      image: oonray/dev:v1.0.33
+      volumeMounts:
+        - mountPath: /home/oonray/.git
+          name: git
