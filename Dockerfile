@@ -37,9 +37,9 @@ COPY .zshrc .zshrc
 RUN /bin/bash -c 'source $HOME/.nvm/nvm.sh && nvm install node npm && npm install --gloabl yarn'
 
 RUN git clone --depth 1 https://github.com/doomemacs/doomemacs /home/oonray/.emacs.d
-RUN .emacs.d/bin/doom install
+RUN .emacs.d/bin/doom -y install
 
 COPY config.el .doom.d
 COPY init.el .doom.d
 COPY packages.el .doom.d
-RUN .emacs.d/bin/doom sync
+RUN .emacs.d/bin/doom -y sync
