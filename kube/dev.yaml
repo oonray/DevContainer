@@ -13,6 +13,8 @@ spec:
   containers:
     - name: emacs
       image: oonray/dev:v1.0.33
+      tty: true
+      stdin: true
       volumeMounts:
         - mountPath: /home/oonray/.git
           name: git
