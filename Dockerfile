@@ -42,4 +42,4 @@ RUN .emacs.d/bin/doom install --force
 COPY config.el .doom.d
 COPY init.el .doom.d
 COPY packages.el .doom.d
-RUN .emacs.d/bin/doom -y sync
+RUN .emacs.d/bin/doom sync --force
