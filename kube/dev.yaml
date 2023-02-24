@@ -20,8 +20,8 @@ spec:
       tty: true
       stdin: true
       env:
-        key: TERM
-        value: xterm-256color
+        - name: TERM
+          value: xterm-256color
       volumeMounts:
         - mountPath: /home/oonray/.git
           name: git
