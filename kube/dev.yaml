@@ -10,11 +10,20 @@ spec:
       hostPath:
         type: DirectoryOrCreate
         path: /home/oonray/.git
+    - name: ssh
+      hostPath:
+        type: DirectoryOrCreate
+        path: /home/oonray/.ssh
   containers:
     - name: emacs
       image: oonray/dev:v1.0.36
       tty: true
       stdin: true
+      env:
+        key: TERM
+        value: xterm-256color
       volumeMounts:
         - mountPath: /home/oonray/.git
           name: git
+        - mountPath: /home/oonray/.ssh
+          name: ssh

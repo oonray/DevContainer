@@ -8,7 +8,6 @@ WORKDIR /tmp
 
 ARG GO_VERSION
 ARG EMACS_VERSION
-ENV TERM="xterm-256color"
 
 RUN echo "go version: $GO_VERSION"
 RUN echo "emacs version: $EMACS_VERSION"
