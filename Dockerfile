@@ -1,13 +1,15 @@
 FROM debian:latest
 RUN apt-get update
 RUN apt-get install -y curl \
-    git zsh build-essential pkg-config
+    git build-essential pkg-config
 RUN apt-get install -y build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libncurses-dev tmux
 RUN apt-get install -y libgnutls28-dev
 WORKDIR /tmp
 
 ARG GO_VERSION
 ARG EMACS_VERSION
+ENV TERM="xterm-256color"
+
 RUN echo "go version: $GO_VERSION"
 RUN echo "emacs version: $EMACS_VERSION"
 
@@ -23,15 +25,12 @@ RUN ./autogen.sh
 RUN ./configure
 RUN make && make install
 
-RUN useradd -ms /bin/zsh oonray
+RUN useradd -ms /bin/bash oonray
 USER oonray
 WORKDIR /home/oonray
 
 RUN /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-COPY .zshrc .zshrc
 
 RUN /bin/bash -c 'source $HOME/.nvm/nvm.sh && nvm install node npm && npm install --gloabl yarn'
 
