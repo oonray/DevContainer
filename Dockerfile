@@ -28,6 +28,9 @@ RUN useradd -ms /bin/bash oonray
 USER oonray
 WORKDIR /home/oonray
 
+RUN echo 'export PATH="$PATH:/home/oonray/go/bin"' >> /home/oonray/.bashrc
+RUN echo 'export TERM="xterm-256color"' >> /home/oonray/.bashrc
+
 RUN /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
