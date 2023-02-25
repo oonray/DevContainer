@@ -32,3 +32,5 @@ spec:
           name: git
         - mountPath: /home/oonray/.ssh
           name: ssh
+        - mountPath: /home/oonray/.gitconfig
+          name: git-config
