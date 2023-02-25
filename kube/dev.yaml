@@ -16,7 +16,7 @@ spec:
         path: /home/oonray/.ssh
   containers:
     - name: emacs
-      image: oonray/dev:v1.0.36
+      image: oonray/dev:v1.0.40
       tty: true
       stdin: true
       env:
