@@ -9,7 +9,7 @@ spec:
   volumes:
     - name: git-config
       hostPath:
-        type: DirectoryOrCreate
+        type: File
         path: /home/oonray/.gitconfig
     - name: git
       hostPath:
